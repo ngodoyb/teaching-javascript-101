@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Examples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background: #333;
+            color: white;
+            padding: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .navegacion ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navegacion a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        
+        .navegacion a:hover {
+            background-color: #555;
+        }
+        
+        main {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .producto {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .producto.activo {
+            border-color: #007bff;
+            box-shadow: 0 2px 5px rgba(0,123,255,0.3);
+        }
+        
+        .producto.expandido {
+            transform: scale(1.02);
+        }
+        
+        .btn-comprar {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-comprar:hover:not(:disabled) {
+            background-color: #218838;
+        }
+        
+        .btn-comprar:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .destacado { 
+            background-color: yellow; 
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .oculto { 
+            display: none; 
+        }
+        
+        .error { 
+            color: red; 
+            border: 2px solid red; 
+        }
+        
+        .descripcion {
+            color: #666;
+            margin: 10px 0;
+        }
+        
+        form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        form div {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input.error, textarea.error {
+            border-color: red;
+        }
+        
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        .dinamico {
+            background-color: #e6f3ff;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            margin: 10px 0;
+        }
+        
+        .item-dinamico {
+            background-color: #f8f9fa;
+            padding: 5px;
+            margin: 2px 0;
+            border-left: 2px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="titulo-principal">Mi Página Web</h1>
+        <nav class="navegacion">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre">Sobre nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="inicio">
+            <h2>Bienvenidos</h2>
+            <p class="descripcion">Este es un párrafo de ejemplo.</p>
+            <p class="descripcion">Este es otro párrafo.</p>
+        </section>
+        
+        <section id="productos">
+            <h2>Productos</h2>
+            <p>Haz clic en los títulos de productos para expandir, usa las flechas ↑↓ para navegar</p>
+            <div class="producto" data-id="1">
+                <h3>Producto 1</h3>
+                <p>Descripción del producto 1</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+            <div class="producto" data-id="2">
+                <h3>Producto 2</h3>
+                <p>Descripción del producto 2</p>
+                <button class="btn-comprar">Comprar</button>
+            </div>
+        </section>
+        
+        <section id="instrucciones">
+            <h2>Instrucciones de Interacción</h2>
+            <ul>
+                <li>Haz clic en el título principal para destacarlo</li>
+                <li>Pasa el mouse sobre el título para cambiar el color</li>
+                <li>Haz clic en los botones "Comprar" para ver animaciones</li>
+                <li>Haz clic en los títulos de productos (H3) para expandirlos</li>
+                <li>Usa las flechas ↑↓ para navegar entre productos</li>
+                <li>Presiona Ctrl+S para simular guardado</li>
+                <li>Presiona Escape para cerrar modales</li>
+                <li>Interactúa con el formulario para ver validaciones en tiempo real</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // Este archivo contiene los ejemplos del módulo de DOM
+        // Revisa el archivo README.md para el código completo
+        
+        console.log("DOM cargado - Ejecuta los ejemplos del README.md");
+        console.log("Abre las herramientas de desarrollo (F12) para ver los logs");
+        
+        // Ejemplo básico de interacción inmediata
+        const titulo = document.getElementById('titulo-principal');
+        if (titulo) {
+            titulo.addEventListener('click', function() {
+                this.classList.toggle('destacado');
+                console.log("Título clickeado - clase destacado:", this.classList.contains('destacado'));
+            });
+            
+            titulo.addEventListener('mouseenter', function() {
+                this.style.color = 'red';
+            });
+            
+            titulo.addEventListener('mouseleave', function() {
+                this.style.color = 'white';
+            });
+        }
+        
+        // Indicación para el usuario
+        setTimeout(() => {
+            const indicacion = document.createElement('div');
+            indicacion.innerHTML = `
+                <strong>💡 Consejo:</strong> Abre las herramientas de desarrollo (F12) 
+                y ve a la pestaña Console para ver los logs de interacción.
+                <br>
+                Luego prueba los ejemplos del archivo README.md copiando y pegando el código en la consola.
+            `;
+            indicacion.style.cssText = `
+                background: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                padding: 15px;
+                border-radius: 5px;
+                margin: 20px 0;
+                border-left: 4px solid #ffc107;
+            `;
+            
+            const main = document.querySelector('main');
+            main.insertBefore(indicacion, main.firstChild);
+        }, 1000);
+    </script>
+</body>
+</html>

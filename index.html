@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 101 - Índice de Módulos</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 3em;
+            margin: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .module-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            background: #f9f9f9;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .module-number {
+            font-size: 0.9em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .module-title {
+            font-size: 1.4em;
+            color: #333;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+        
+        .module-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .module-topics {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+        
+        .module-topics li {
+            padding: 3px 0;
+            color: #777;
+            font-size: 0.9em;
+        }
+        
+        .module-topics li::before {
+            content: "▸ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .module-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .module-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.coming-soon {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .progress-bar {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .progress-container {
+            background: #eee;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            width: 75%;
+            transition: width 0.3s ease;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>JavaScript 101</h1>
+            <p class="subtitle">Microejercicios Introductorios en Español</p>
+        </div>
+        
+        <div class="progress-bar">
+            <h3>Progreso del Curso: 75%</h3>
+            <div class="progress-container">
+                <div class="progress-fill"></div>
+            </div>
+            <p>10 de 13 módulos completados</p>
+        </div>
+        
+        <div class="modules-grid">
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 01</div>
+                <h3 class="module-title">Fundamentos Web y Entorno</h3>
+                <p class="module-description">
+                    Introducción a JavaScript, integración con HTML y herramientas de desarrollo.
+                </p>
+                <ul class="module-topics">
+                    <li>Tu primer script</li>
+                    <li>JavaScript externo</li>
+                    <li>Herramientas de desarrollo</li>
+                </ul>
+                <a href="01-fundamentos-web/" class="module-link">Empezar Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 02</div>
+                <h3 class="module-title">Conceptos Básicos</h3>
+                <p class="module-description">
+                    Tipado dinámico, sintaxis, ejecución y depuración básica.
+                </p>
+                <ul class="module-topics">
+                    <li>Tipado dinámico</li>
+                    <li>Sintaxis y estructura</li>
+                    <li>Depuración básica</li>
+                </ul>
+                <a href="02-conceptos-basicos/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 03</div>
+                <h3 class="module-title">Variables y Tipos de Datos</h3>
+                <p class="module-description">
+                    var, let, const, tipos primitivos y conversiones.
+                </p>
+                <ul class="module-topics">
+                    <li>Declaración de variables</li>
+                    <li>Tipos primitivos y complejos</li>
+                    <li>Conversión de tipos</li>
+                </ul>
+                <a href="03-variables-tipos/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 04</div>
+                <h3 class="module-title">Ámbito y Contexto</h3>
+                <p class="module-description">
+                    Scope, hoisting, closures y cadena de ámbitos.
+                </p>
+                <ul class="module-topics">
+                    <li>Ámbito global vs local</li>
+                    <li>Hoisting (elevación)</li>
+                    <li>Closures básicos</li>
+                </ul>
+                <a href="04-ambito-contexto/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 05</div>
+                <h3 class="module-title">Funciones</h3>
+                <p class="module-description">
+                    Declaraciones, expresiones, arrow functions y callbacks.
+                </p>
+                <ul class="module-topics">
+                    <li>Formas de declarar funciones</li>
+                    <li>Parámetros y argumentos</li>
+                    <li>Funciones de orden superior</li>
+                </ul>
+                <a href="05-funciones/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 06</div>
+                <h3 class="module-title">El Objeto `this`</h3>
+                <p class="module-description">
+                    Comportamiento de this, call, apply, bind y arrow functions.
+                </p>
+                <ul class="module-topics">
+                    <li>this en diferentes contextos</li>
+                    <li>call, apply y bind</li>
+                    <li>Arrow functions y this</li>
+                </ul>
+                <a href="06-objeto-this/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 07</div>
+                <h3 class="module-title">Objetos y POO</h3>
+                <p class="module-description">
+                    Prototipos, clases ES6, herencia y encapsulación.
+                </p>
+                <ul class="module-topics">
+                    <li>Creación de objetos</li>
+                    <li>Prototipos y herencia</li>
+                    <li>Clases ES6</li>
+                </ul>
+                <a href="07-objetos-poo/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 08</div>
+                <h3 class="module-title">Arrays, Maps y Sets</h3>
+                <p class="module-description">
+                    Estructuras de datos, métodos de arrays y colecciones.
+                </p>
+                <ul class="module-topics">
+                    <li>Métodos de arrays</li>
+                    <li>Maps para clave-valor</li>
+                    <li>Sets para valores únicos</li>
+                </ul>
+                <a href="08-arrays-mapas-sets/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 09</div>
+                <h3 class="module-title">Programación Asíncrona</h3>
+                <p class="module-description">
+                    Callbacks, Promises, async/await y event loop.
+                </p>
+                <ul class="module-topics">
+                    <li>Callbacks y event loop</li>
+                    <li>Promises y cadenas</li>
+                    <li>Async/await sintaxis</li>
+                </ul>
+                <a href="09-asincronia/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status coming-soon">⏳ Próximamente</div>
+                <div class="module-number">MÓDULO 10</div>
+                <h3 class="module-title">Módulos</h3>
+                <p class="module-description">
+                    CommonJS, ES6 modules, import/export y organización.
+                </p>
+                <ul class="module-topics">
+                    <li>CommonJS vs ES6 modules</li>
+                    <li>Import/Export</li>
+                    <li>Bundlers básicos</li>
+                </ul>
+                <span class="module-link" style="opacity: 0.6;">Próximamente</span>
+            </div>
+            
+            <div class="module-card">
+                <div class="status completed">✓ Completado</div>
+                <div class="module-number">MÓDULO 11</div>
+                <h3 class="module-title">Manipulación del DOM</h3>
+                <p class="module-description">
+                    Selección de elementos, eventos y modificación dinámica.
+                </p>
+                <ul class="module-topics">
+                    <li>Selección de elementos</li>
+                    <li>Eventos y listeners</li>
+                    <li>Modificación dinámica</li>
+                </ul>
+                <a href="11-manipulacion-dom/" class="module-link">Ver Módulo</a>
+            </div>
+            
+            <div class="module-card">
+                <div class="status coming-soon">⏳ Próximamente</div>
+                <div class="module-number">MÓDULO 12</div>
+                <h3 class="module-title">Paradigmas Frontend</h3>
+                <p class="module-description">
+                    Programación funcional, reactiva y patrones de arquitectura.
+                </p>
+                <ul class="module-topics">
+                    <li>Programación funcional</li>
+                    <li>Componentes y estado</li>
+                    <li>Patrones de arquitectura</li>
+                </ul>
+                <span class="module-link" style="opacity: 0.6;">Próximamente</span>
+            </div>
+            
+            <div class="module-card">
+                <div class="status coming-soon">⏳ Próximamente</div>
+                <div class="module-number">MÓDULO 13</div>
+                <h3 class="module-title">Herramientas Modernas</h3>
+                <p class="module-description">
+                    NPM, bundlers, transpilación y herramientas de desarrollo.
+                </p>
+                <ul class="module-topics">
+                    <li>NPM y dependencias</li>
+                    <li>Bundlers (Webpack, Vite)</li>
+                    <li>Linting y formateo</li>
+                </ul>
+                <span class="module-link" style="opacity: 0.6;">Próximamente</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><span class="emoji">🚀</span> <strong>¡Feliz aprendizaje!</strong> <span class="emoji">🚀</span></p>
+            <p>JavaScript 101 - Una colección de microejercicios para dominar JavaScript desde cero</p>
+            <p>Creado con <span class="emoji">❤️</span> para la comunidad de desarrollo en español</p>
+        </div>
+    </div>
+    
+    <script>
+        // Animación suave para las tarjetas
+        const cards = document.querySelectorAll('.module-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+        
+        // Actualizar barra de progreso
+        setTimeout(() => {
+            document.querySelector('.progress-fill').style.width = '75%';
+        }, 1000);
+        
+        console.log("🎉 ¡Bienvenido a JavaScript 101!");
+        console.log("📚 Explora los módulos y comienza tu viaje de aprendizaje");
+    </script>
+</body>
+</html>
